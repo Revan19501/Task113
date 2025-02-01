@@ -12,10 +12,10 @@ import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
 
-    private static final String INSERT_USER = "INSERT INTO users(name, surname, age) VALUES (?, ?, ?);";
+    private static final String INSERT_USER = "INSERT INTO users(name, lastName , age) VALUES (?, ?, ?);";
     private static final String UPDATE_USER = "UPDATE users SET age = ? WHERE id = ?;";
     private static final String DELETE_USER = "DELETE FROM users WHERE id = ?";
-    private static final String CREATE_TABLE = "CREATE TABLE users (id BIGINT AUTO_INCREMENT,  name VARCHAR(80), surname VARCHAR(100), age TINYINT (100), PRIMARY KEY (id));";
+    private static final String CREATE_TABLE = "CREATE TABLE users (id BIGINT AUTO_INCREMENT,  name VARCHAR(80), lastName  VARCHAR(100), age TINYINT (100), PRIMARY KEY (id));";
 
     public UserDaoJDBCImpl() {
 
@@ -46,8 +46,8 @@ public class UserDaoJDBCImpl implements UserDao {
             ps.setString(1, name);
             ps.setString(2, lastName);
             ps.setInt(3, age);
+            System.out.println("User с именем " + name + " добавлен в базу данных");
             ps.executeUpdate();
-
         } catch (SQLException e) {
             System.out.println("SQLException: " + e.getMessage() + "Ошибка в сейв юзерс ");
         }
@@ -74,10 +74,9 @@ public class UserDaoJDBCImpl implements UserDao {
             while (rs.next()) {
                 long id = rs.getLong("id");
                 String name = rs.getString("name");
-                String surname = rs.getString("surname");
+                String lastName  = rs.getString("lastName");
                 byte age = rs.getByte("age");
-                users.add(new User(id, name, surname, age));
-                System.out.println("User с именем " + name + " добавлен в базу данных");
+                users.add(new User(id, name, lastName , age));
             }
 
         } catch (SQLException e) {
