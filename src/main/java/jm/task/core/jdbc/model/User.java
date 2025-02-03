@@ -3,7 +3,6 @@ package jm.task.core.jdbc.model;
 
 import jakarta.persistence.*;
 
-import javax.annotation.processing.Generated;
 
 @Table(name = "users")
 @Entity
