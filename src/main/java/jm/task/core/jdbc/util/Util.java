@@ -32,12 +32,11 @@ public class Util {
     public SessionFactory getFactory() {
         Properties properties = new Properties();
         properties.setProperty("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
-        properties.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/mysql");
-        properties.setProperty("hibernate.connection.username", "root");
-        properties.setProperty("hibernate.connection.password", "1234");
+        properties.setProperty("hibernate.connection.url", dbUrl);
+        properties.setProperty("hibernate.connection.username", dbUsername);
+        properties.setProperty("hibernate.connection.password", dbPassword);
         properties.setProperty("hibernate.show_sql", "com.mysql.jdbc.Driver");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-       properties.setProperty("hibernate.hbm2ddl.auto", "update");
 
         Configuration configuration = new Configuration().addAnnotatedClass(User.class);
 

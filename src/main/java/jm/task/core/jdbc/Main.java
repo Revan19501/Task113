@@ -9,13 +9,13 @@ public class Main {
     public static void main(String[] args) {
         UserService userService = new UserServiceImpl();
         userService.createUsersTable();
-        userService.saveUser("Катя", "Светлова", (byte) 12);
-        userService.saveUser("Cвета", "Светлова", (byte) 23);
-        userService.saveUser("Нюра", "Светлова", (byte) 34);
-        System.out.println(userService.getAllUsers());
-        userService.removeUserById(2);
-        System.out.println(userService.getAllUsers());
-        userService.dropUsersTable();
-        System.out.println(userService.getAllUsers());
+        userService.saveUser("Алёна", "Пиписечкина-Сисечкина", (byte) 25);
+//        userService.saveUser("Cвета", "Светлова", (byte) 23);
+//        userService.saveUser("Нюра", "Светлова", (byte) 34);
+//        System.out.println(userService.getAllUsers());
+//        userService.removeUserById(2);
+//        System.out.println(userService.getAllUsers());
+//        userService.dropUsersTable();
+//        System.out.println(userService.getAllUsers());
     }
 }
