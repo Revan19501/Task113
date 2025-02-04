@@ -11,10 +11,12 @@ import org.hibernate.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hibernate.resource.transaction.spi.TransactionStatus.ACTIVE;
+
 public class UserDaoHibernateImpl implements UserDao {
 
-    Util util = new Util();
-    SessionFactory sf = util.getFactory();
+    private Util util = new Util();
+    private SessionFactory sf = util.getFactory();
     public UserDaoHibernateImpl() {
 
     }
@@ -31,7 +33,7 @@ public class UserDaoHibernateImpl implements UserDao {
                     .executeUpdate();
             transaction.commit();
         }catch (Exception e) {
-            if (transaction.isActive() || transaction.getStatus() == null) {
+            if (transaction.getStatus() == ACTIVE || transaction.getStatus() == null) {
                 transaction.rollback();
             }
         }
@@ -45,7 +47,7 @@ public class UserDaoHibernateImpl implements UserDao {
             session.createNativeQuery("DROP TABLE IF EXISTS users;").executeUpdate();
             session.getTransaction().commit();
         }catch (Exception e) {
-            if (transaction.isActive() || transaction.getStatus() == null) {
+            if (transaction.getStatus() == ACTIVE || transaction.getStatus() == null) {
                 transaction.rollback();
             }
         }
@@ -60,7 +62,7 @@ public class UserDaoHibernateImpl implements UserDao {
             session.save(new User(name, lastName, age));
             session.getTransaction().commit();
         }catch (Exception e) {
-            if (transaction.isActive() || transaction.getStatus() == null) {
+            if (transaction.getStatus() == ACTIVE || transaction.getStatus() == null) {
                 transaction.rollback();
             }
         }
@@ -75,7 +77,7 @@ public class UserDaoHibernateImpl implements UserDao {
             session.delete(user);
             session.getTransaction().commit();
         }catch (Exception e) {
-            if (transaction.isActive() || transaction.getStatus() == null) {
+            if (transaction.getStatus() == ACTIVE || transaction.getStatus() == null) {
                 transaction.rollback();
             }
         }
@@ -89,7 +91,7 @@ public class UserDaoHibernateImpl implements UserDao {
             users = session.createQuery("from User").list();
             session.getTransaction().commit();
         } catch (Exception e) {
-            if (transaction.isActive() || transaction.getStatus() == null) {
+            if (transaction.getStatus() == ACTIVE || transaction.getStatus() == null) {
                 transaction.rollback();
             }
         }
@@ -103,7 +105,7 @@ public class UserDaoHibernateImpl implements UserDao {
             session.createQuery("delete User").executeUpdate();
             session.getTransaction().commit();
         }catch (Exception e) {
-            if (transaction.isActive() || transaction.getStatus() == null) {
+            if (transaction.getStatus() == ACTIVE || transaction.getStatus() == null) {
                 transaction.rollback();
             }
         }
